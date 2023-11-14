@@ -160,17 +160,17 @@
                     ctrIcon.classList.add("ion-pause");
                 }
             }
-            if (audio.play()) {
-                setInterval(() => {
-                    progress.value = audio.curentTime;
-                }, 500);
-            }
-            progress.onchange = function () {
-                audio.playe();
-                audio.curentTime = progress.value;
-                ctrIcon.classList.remove("ion-play");
-                ctrIcon.classList.add("ion-pause");
-            };
+            // if (audio.play()) {
+            //     setInterval(() => {
+            //         progress.value = audio.curentTime;
+            //     }, 500);
+            // }
+            // progress.onchange = function () {
+            //     audio.playe();
+            //     audio.curentTime = progress.value;
+            //     ctrIcon.classList.remove("ion-play");
+            //     ctrIcon.classList.add("ion-pause");
+            // };
             // let audioplay = (i) => {
             //   audio = songs[i];
             //     curentMusic = i;
