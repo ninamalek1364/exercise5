@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        .moveMe {
+            background-color: blue;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            color: white;
+            text-align: center;
+            font-size: small;
+            transition: 0.5s;
+        }
+        .fixed {
+            background-color: rgb(255, 0, 0);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            color: white;
+            text-align: center;
+        }
+        .text {
+            text-align: center;
+        }
+    </style>
+    <body onkeyup="eventFn(event)">
+        <div class="moveMe" id="moveMe" onkeyup="move()"><p class="text">move me</p></div>
+        <div class="fixed" id="fixed"><p class="text">hit me</p></div>
+
+        <!-- javascript====================================== -->
+        <script>
+            let topEl = 0;
+            let leftEl = 0;
+            let speed = 10;
+            function eventFn(e) {
+                if (e.key == "ArrowUp") {
+                    topEl -= speed;
+                } else if (e.key == "ArrowDown") {
+                    topEl += speed;
+                } else if (e.key == "ArrowRight") {
+                    leftEl += speed;
+                } else if (e.key == "ArrowLeft") {
+                    leftEl -= speed;
+                }
+                let moveMe = document.getElementById("moveMe");
+                moveMe.style.top = `${topEl}px`;
+                moveMe.style.left = `${leftEl}px`;
+            };
+            if (moveMe.style.top==50%  moveMe.style.left==50%){
+                alert(win);
+            }
+        </script>
+    </body>
+</html>

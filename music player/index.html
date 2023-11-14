@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>music player</title>
+        <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
+    </head>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: bisque;
+        }
+        .music-player {
+            width: 350px;
+            height: 500px;
+            border-radius: 20px;
+            background-color: rgb(152, 110, 59);
+            box-shadow: 0 40px 100px rgb(255, 132, 0);
+            padding: 30px;
+            overflow: hidden;
+            color: rgb(46, 28, 18);
+            margin-top: 80px;
+        }
+        .music-name,
+        .artist-name {
+            text-align: center;
+            text-transform: capitalize;
+        }
+        .music-name {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        .img {
+            position: relative;
+            display: block;
+            margin: 40px auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background-image: url(img/Masih-And-Arash-Music-fa.com_.jpg);
+            background-size: cover;
+            box-shadow: 7px 10px 10px rgb(44, 21, 1);
+        }
+        .song-slider {
+            width: 100%;
+            position: relative;
+        }
+        #progress {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 4px;
+            border-radius: 20px;
+            background-color: bisque;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        #progress::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 3px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: rgb(104, 45, 8);
+            box-shadow: -300px 0 0 300px;
+        }
+        #song-duration {
+            position: absolute;
+            right: 0;
+        }
+        .controls {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: auto;
+            margin-top: 20px;
+        }
+        .plye-pause {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .pause {
+            font-size: 20px;
+        }
+        .play {
+            font-size: 20px;
+        }
+    </style>
+    <body>
+        <audio src="audio/Masih And Arash - Joon (320).mp3" id="audio"></audio>
+        <div class="music-player">
+            <h1 class="music-name">song</h1>
+            <p class="artist-name">artist</p>
+            <div class="img"></div>
+            <div class="song-slider">
+                <input type="range" value="0" id="progress" />
+                <span Id="curentPlay">00:00</span>
+                <span Id="song-duration">00:00</span>
+            </div>
+            <div class="controls">
+                <span style="font-size: 40px; margin-left: 10px; padding-left: 5px" class="backward">
+                    <i class="ion-android-arrow-dropleft-circle"></i
+                ></span>
+                <button class="plye-pause">
+                    <span class="pause" onclick="playepause()"><i class="ion-play" id="ctrIcon"></i></span>
+                    <!-- <span class="play" style="display: none"><i class="ion-pause"></i></span> -->
+                </button>
+                <span style="font-size: 40px; margin-right: 10px; padding-right: 5px" class="forward"
+                    ><i class="ion-android-arrow-dropright-circle"></i
+                ></span>
+            </div>
+        </div>
+
+        <!-- ===================================js ======================-->
+        <script>
+            let songs = [
+                {
+                    songName: "joon",
+                    artist: "masih&arashAp",
+                    img: "img/Masih-And-Arash-Music-fa.com_.jpg",
+                    srcAudio: "audio/Masih And Arash - Joon (320).mp3",
+                },
+                {
+                    songName: "jsorate mah",
+                    artist: "mehdi Asadi",
+                    img: "img/Mehdi-Asadi-Taha-Age-Cheshat-Musico.ir_.jpg",
+                    srcAudio: "audio/Mehdi AsadiTaha - Soorate Mah (320).mp3",
+                },
+            ];
+            let audio = document.getElementById("audio");
+            let progress = document.getElementById("progress");
+            let ctrIcon = document.getElementById("ctrIcon");
+
+            audio.onloadedmetadata = function () {
+                progress.max = audio.duration;
+                progress.value = audio.curentTime;
+            };
+
+            function playepause() {
+                if (ctrIcon.classList.contains("ion-pause")) {
+                    audio.pause();
+                    ctrIcon.classList.remove("ion-pause");
+                    ctrIcon.classList.add("ion-play");
+                } else {
+                    audio.play();
+                    ctrIcon.classList.remove("ion-play");
+                    ctrIcon.classList.add("ion-pause");
+                }
+            }
+            if (audio.play()) {
+                setInterval(() => {
+                    progress.value = audio.curentTime;
+                }, 500);
+            }
+            progress.onchange = function () {
+                audio.playe();
+                audio.curentTime = progress.value;
+                ctrIcon.classList.remove("ion-play");
+                ctrIcon.classList.add("ion-pause");
+            };
+            // let audioplay = (i) => {
+            //   audio = songs[i];
+            //     curentMusic = i;
+            //     music.src = songs.srcAudio;
+            //     musicName.innerHTML = song.songName;
+            //     artistName.innerHTML = songs.artist;
+            //     image.style.backgroundImage = `url(${songs.img})`;
+            // };
+        </script>
+    </body>
+</html>
